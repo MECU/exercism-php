@@ -8,8 +8,8 @@ function encode(string $rawInput, int $a, int $b): string
     }
 
     // Remove everything not a letter or numbers
-    $input = preg_replace('/\W/', '', $rawInput);
-    $array = array_map('\strtolower', str_split($input));
+    $array = str_split(preg_replace('/[^a-z0-9]/', '', strtolower($rawInput)));
+
     foreach ($array as &$value) {
         // Numbers stay numbers
         if (!is_numeric($value)) {
@@ -27,8 +27,8 @@ function decode(string $rawInput, int $a, int $b): string
     }
 
     // Remove everything not a letter or number
-    $input = preg_replace('/\W/', '', $rawInput);
-    $array = array_map('\strtolower', str_split($input));
+    $array = str_split(preg_replace('/[^a-z0-9]/', '', strtolower($rawInput)));
+
     $mmi = mmi($a);
     foreach ($array as &$value) {
         $x = letter2Index($value) - $b;
